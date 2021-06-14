@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using CommandAPI.Model;
 using System.Linq;
+using System;
 
 namespace CommandAPI.Data
 {
@@ -14,7 +15,12 @@ namespace CommandAPI.Data
 
         public void CreateCommand(Command cmd)
         {
-            throw new System.NotImplementedException();
+            if(cmd == null)
+            {
+                throw new ArgumentNullException(nameof(cmd));
+            }
+
+            _context.Commands.Add(cmd);
         }
 
         public void DeleteCommand(Command cmd)
@@ -34,12 +40,12 @@ namespace CommandAPI.Data
 
         public bool SaveChanges()
         {
-            throw new System.NotImplementedException();
+            return (_context.SaveChanges() >= 0);
         }
 
         public void UpdateCommand(Command cmd)
         {
-            throw new System.NotImplementedException();
+            //We don't need to do anything here of EF ORM
         }
     }
 }
